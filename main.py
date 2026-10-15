@@ -15,7 +15,7 @@ SERVER_URL = "http://127.0.0.1:5000/"
 sock = socketio.AsyncClient()
 
 
-class Application(App):
+class Apollinaris(App):
     AUTO_FOCUS = "#message_input"
     BINDINGS: ClassVar[list[BindingType]] = [("d", "toggle_dark", "Toggle dark modes")]
     CSS = """
@@ -80,4 +80,4 @@ class Application(App):
 
 
 if __name__ == "__main__":
-    Application().run()
+    Apollinaris().run()

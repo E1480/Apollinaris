@@ -18,30 +18,43 @@ sock = socketio.AsyncClient()
 class Application(App):
     AUTO_FOCUS = "#message_input"
     BINDINGS: ClassVar[list[BindingType]] = [("d", "toggle_dark", "Toggle dark modes")]
-
     CSS = """
+        Rule {
+            margin: 0;
+        }
+
+        #separator {
+            color: $background-lighten-1;
+        }
+        #chat_room {
+            layout: vertical;
+            width: 100%;
+            height: 2fr;
+        }
+
         #chat_log {
+            width: 100%;
             height: 1fr;
         }
 
         #message_holder {
-            height: auto;
-            # dock: bottom;
+            layout: horizontal;
+            width: 100%;
+            height: 3;
         }
 
         #message_input {
             width: 1fr;
         }
 
-        #message_holder Button {
-            width: auto;
-            min-width: 10;
+        #send_message {
+            width: 12;
         }
     """
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield ChatRoom(sock, USERNAME, id="message_holder")
+        yield ChatRoom(sock, USERNAME, id="chat_room")
         yield Footer()
 
     def on_mount(self) -> None:
